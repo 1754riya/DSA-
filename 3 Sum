@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        set<vector<int>>st;
+        int target=0;
+        int n=nums.size();
+        for(int i=0; i<n;i++){
+            unordered_set<int>seen;
+            for(int j=i+1;j<n;j++){
+                target=-(nums[i]+nums[j]);
+                if(seen.find(target)!=seen.end()){
+                    vector<int>temp={nums[i],nums[j],target};
+                    sort(temp.begin(),temp.end());
+                    st.insert(temp);
+                    
+                }
+                seen.insert(nums[j]);
+            }
+        }
+          vector<vector<int>>result (st.begin(), st.end());;
+        return result;
+    }
+};
