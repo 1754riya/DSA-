@@ -1,0 +1,20 @@
+// User function Template for C++
+class Solution {
+  public:
+    Node* insertNodeAtPos(Node* head, int pos, int x) {
+        Node* newNode= new Node(x);
+        if(pos==NULL){
+            newNode->next=head;
+            return head;
+        }
+        
+        Node*temp=head;
+        for(int i=1; temp!=NULL && i<pos; i++){
+            temp=temp->next;
+        }
+         if(temp==NULL) return head; // if position is greater than number of nodes
+        newNode->next=temp->next;
+        temp->next=newNode;
+        return head;
+    }
+};
