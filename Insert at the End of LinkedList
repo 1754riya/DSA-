@@ -1,0 +1,24 @@
+/*Structure of the linked list node is as
+struct Node {
+  int data;
+  struct Node * next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+}; */
+
+class Solution {
+  public:
+    Node *insertAtEnd(Node *head, int x) {
+       Node*end= new Node(x);
+       if(head==NULL) return 0;
+       Node* temp=head;
+       while(temp->next!=nullptr){
+           temp=temp->next;
+       }
+       temp->next=end;
+       return head;
+        
+    }
+};
