@@ -1,3 +1,6 @@
+## “Consistency always beats intensity. Keep showing up!”
+---
+
  # 💻 DSA Daily Practice 🚀 
 
 Welcome to my **Daily DSA Practice** repository!  
@@ -21,7 +24,5 @@ I’ve committed to solving and uploading DSA problems regularly from platforms 
 ## 🎯 My Goal
 
 Solve at least 1 DSA problem per day and stay consistent to build strong problem-solving skills for coding interviews and real-world challenges.
-
-> “Consistency always beats intensity. Keep showing up!”
 
 
