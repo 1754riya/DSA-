@@ -13,12 +13,6 @@ I’ve committed to solving and uploading DSA problems regularly from platforms 
 - 💚 [GeeksforGeeks](https://www.geeksforgeeks.org/user/rmehtayl74/)
 - 🧡 [LeetCode](https://leetcode.com/u/Riya_Mehta17/)
 
-## 📅 Daily Progress Tracker
-
-![GitHub Streak](https://streak-stats.demolab.com?user=rmehtayl74&theme=tokyonight&hide_border=true)
-
----
-
 ## 🎯 My Goal
 
 Solve at least 1 DSA problem per day and stay consistent to build strong problem-solving skills for coding interviews and real-world challenges.
