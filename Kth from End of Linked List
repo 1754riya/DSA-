@@ -1,0 +1,19 @@
+// Function to find the data of kth node from the end of a linked list.
+class Solution {
+  public:
+    int getKthFromLast(Node *head, int k) {
+        if(head==NULL) return -1;
+        Node*slow=head;
+        Node*fast=head;
+        for(int i=0;i<k;i++){
+            if(fast==NULL){
+            return -1;
+        }
+        fast=fast->next;
+    }
+    while(fast){
+        slow=slow->next;
+        fast=fast->next;
+    }
+    return  slow?slow->data:-1;}
+};
