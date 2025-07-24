@@ -6,9 +6,9 @@ class Solution {
         Node*evenHead=even;
         if(head==NULL || head->next==NULL) return ;
         while(even!=NULL && even->next!=NULL){
-            odd->next=even->next;
+            odd->next= odd->next->next;;
             odd=odd->next;
-            even->next=odd->next;
+            even->next= even->next->next;;
             even=even->next;
         }
         odd->next=evenHead;
