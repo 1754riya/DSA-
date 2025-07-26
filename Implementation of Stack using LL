@@ -1,0 +1,25 @@
+class MyStack {
+  private:
+    StackNode *top;
+    int size;
+
+  public:
+    void push(int x) {
+        StackNode*temp= new StackNode(x);
+        temp->next=top;
+        top=temp;
+        size++;
+    }
+    int pop() {
+        if(top==NULL){
+            return -1;
+        }
+        int value=top->data;
+        StackNode*temp=top;
+        top=top->next;
+        delete temp;
+        size=size-1;;
+        return value;
+  }
+    MyStack() { top = NULL; size=0;}
+};
