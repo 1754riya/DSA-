@@ -1,0 +1,23 @@
+// User function Template for C++
+
+class Solution {
+  public:
+    string preToPost(string pre_exp) {
+        stack<string>st;
+        string ans="";
+        for(int i=pre_exp.length()-1;i>=0;i--){
+            char ch=pre_exp[i];
+            if(isalnum(ch)){
+                st.push(string(1,ch));
+            }
+            else{
+              if(st.size()<2) return "invalid";
+              string t1= st.top(); st.pop();
+              string t2= st.top();st.pop();
+              string expr=t1+t2+ch;
+              st.push(expr);
+            }
+        }
+          return (st.size()==1)?st.top():"Invalid";
+    }
+};
