@@ -1,0 +1,22 @@
+// User function Template for C++
+
+class Solution {
+  public:
+    string postToInfix(string exp) {
+        stack<string>st;
+        for(char c:exp){
+            if(isalnum(c)){
+                st.push(string(1,c));
+            }
+            else{
+                if(st.size()<2) return "Invalid";
+                string t1=st.top(); st.pop();
+                string t2=st.top(); st.pop();
+                st.push("("+ t2 + c + t1 + ")");
+            }
+        }
+       if (st.size() != 1) return "Invalid";
+     return st.top();
+        
+    }
+};
