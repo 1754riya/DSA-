@@ -1,0 +1,21 @@
+// User function Template for C++
+
+class Solution {
+  public:
+
+    vector<int> count_NGE(int n, vector<int> &arr, int queries, vector<int> &indices) {
+        // write your code here
+        vector<int>ans;
+        for(int i=0;i<queries;i++){
+            int index=indices[i];
+            int ct=0;
+            for(int j=index+1;j<n;j++){
+                if(arr[j]>arr[index]){
+                    ct++;
+                }
+            }
+                ans.push_back(ct);
+            }
+            return ans;
+    }
+};
