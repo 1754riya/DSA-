@@ -1,0 +1,61 @@
+// User function Template for C++
+//  User function template for C++
+
+class Solution {
+  public:
+    vector<int> constructLowerArray(vector<int> &arr) {
+        // code here
+       int n = arr.size();
+        vector<int> ans(n, 0);
+        vector<pair<int, int>> valIndex;
+
+        // Pair each value with its index
+        for (int i = 0; i < n; i++) {
+            valIndex.push_back({arr[i], i});
+        }
+
+        // Run modified merge sort
+        mergeSort(valIndex, ans, 0, n - 1);
+        return ans;
+    }
+      private:
+    void mergeSort(vector<pair<int, int>> &valIndex, vector<int> &ans, int left, int right) {
+        if (left >= right) return;
+
+        int mid = (left + right) / 2;
+        mergeSort(valIndex, ans, left, mid);
+        mergeSort(valIndex, ans, mid + 1, right);
+        merge(valIndex, ans, left, mid, right);
+    }
+
+    void merge(vector<pair<int, int>> &valIndex, vector<int> &ans, int left, int mid, int right) {
+        vector<pair<int, int>> temp;
+        int i = left;
+        int j = mid + 1;
+        int countRightSmaller = 0;
+
+        while (i <= mid && j <= right) {
+            if (valIndex[j].first < valIndex[i].first) {
+                // count this smaller element
+                countRightSmaller++;
+                temp.push_back(valIndex[j++]);
+            } else {
+                ans[valIndex[i].second] += countRightSmaller;
+                temp.push_back(valIndex[i++]);
+            }
+        }
+
+        while (i <= mid) {
+            ans[valIndex[i].second] += countRightSmaller;
+            temp.push_back(valIndex[i++]);
+        }
+
+        while (j <= right) {
+            temp.push_back(valIndex[j++]);
+        }
+
+        for (int k = left; k <= right; k++) {
+            valIndex[k] = temp[k - left];
+        }
+    }
+};
