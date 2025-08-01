@@ -1,36 +1,39 @@
-int n = arr.size();
-    vector<int> prevLess(n), nextLess(n);
-    stack<int> s;
+class Solution {
+public:
+    int sumSubarrayMins(vector<int>& arr) {
+            stack<int>st;
+            int n=arr.size();
+            vector<int>nge(n),psel(n);
+            for(int i=n-1; i>=0;i--){
+                while(!st.empty() && arr[st.top()]>arr[i]){
+                    st.pop();
+                }
+                nge[i]=st.empty()?n:st.top();
+                st.push(i);
 
-    // 1. Previous Less Element (PLE)
-    for (int i = 0; i < n; ++i) {
-        while (!s.empty() && arr[s.top()] > arr[i]) {
-            s.pop();
+            }
+            
+        while (!st.empty()) st.pop();
+
+        for(int i=0; i<n;i++){
+                while(!st.empty() && arr[st.top()]>arr[i]){
+                    st.pop();
+                }
+                psel[i]=st.empty()?-1:st.top();
+
+            
+            st.push(i);
         }
-        prevLess[i] = s.empty() ? -1 : s.top();
-        s.push(i);
-    }
 
-    // Clear stack to reuse
-    while (!s.empty()) s.pop();
+           long long result = 0;
+        int mod = 1e9 + 7;
 
-    // 2. Next Less Element (NLE)
-    for (int i = n - 1; i >= 0; --i) {
-        while (!s.empty() && arr[s.top()] >= arr[i]) {
-            s.pop();
+        for (int i = 0; i < n; ++i) {
+            long long left = i -psel[i];
+            long long right = nge[i] - i;
+            result = (result + arr[i] * left * right) % mod;
         }
-        nextLess[i] = s.empty() ? n : s.top();
-        s.push(i);
-    }
-
-    // 3. Calculate result
-    long long result = 0;
-    int mod = 1e9 + 7;
-    for (int i = 0; i < n; ++i) {
-        long long left = i - prevLess[i];
-        long long right = nextLess[i] - i;
-        result = (result + arr[i] * left * right) % mod;
-    }
-
-    return (int)result;
-}
+        return (int)result;
+        }
+    
+};
