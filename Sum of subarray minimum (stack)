@@ -1,0 +1,36 @@
+int n = arr.size();
+    vector<int> prevLess(n), nextLess(n);
+    stack<int> s;
+
+    // 1. Previous Less Element (PLE)
+    for (int i = 0; i < n; ++i) {
+        while (!s.empty() && arr[s.top()] > arr[i]) {
+            s.pop();
+        }
+        prevLess[i] = s.empty() ? -1 : s.top();
+        s.push(i);
+    }
+
+    // Clear stack to reuse
+    while (!s.empty()) s.pop();
+
+    // 2. Next Less Element (NLE)
+    for (int i = n - 1; i >= 0; --i) {
+        while (!s.empty() && arr[s.top()] >= arr[i]) {
+            s.pop();
+        }
+        nextLess[i] = s.empty() ? n : s.top();
+        s.push(i);
+    }
+
+    // 3. Calculate result
+    long long result = 0;
+    int mod = 1e9 + 7;
+    for (int i = 0; i < n; ++i) {
+        long long left = i - prevLess[i];
+        long long right = nextLess[i] - i;
+        result = (result + arr[i] * left * right) % mod;
+    }
+
+    return (int)result;
+}
