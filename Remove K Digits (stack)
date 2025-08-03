@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        string stack;
+        for( char digit: num){
+        while(k>0 && !stack.empty() && stack.back()>digit){
+            stack.pop_back();
+            k--;
+        } 
+        stack.push_back(digit);       
+        }
+        while(k>0 &&!stack.empty()){
+            stack.pop_back();
+            k--;
+        }
+        int nonzero=0;
+        while(nonzero<stack.size() && stack[nonzero]=='0'){
+            nonzero++;
+        }
+        string result= stack.substr(nonzero);
+        return result.empty() ? "0":result;
+    }
+};
