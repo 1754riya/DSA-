@@ -1,0 +1,27 @@
+// User function Template for C++
+
+class Solution {
+  public:
+    vector<string> generateBinaryStrings(int num) {
+        vector<string> result;
+        string current(num, '0'); // initially filled with 0s
+        backtrack(0, num, current, result);
+        return result;
+    }
+    
+  private:
+    void backtrack(int index, int n, string &current, vector<string> &result) {
+        if (index == n) {
+            result.push_back(current);
+            return;
+        }
+        
+        // Place '0' at this index
+        current[index] = '0';
+        backtrack(index + 1, n, current, result);
+        
+        // Place '1' at this index
+        current[index] = '1';
+        backtrack(index + 1, n, current, result);
+    }
+};
