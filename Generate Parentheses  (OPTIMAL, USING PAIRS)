@@ -1,0 +1,35 @@
+// User function Template for C++
+
+// N is the number of pairs of parentheses
+// Return list of all combinations of balanced parantheses
+class Solution {
+  public:
+    vector<string>result;
+    void solve(string &curr, int open, int close,int pairs){
+        if(curr.length()==pairs*2){
+            result.push_back(curr);
+            return;
+        }
+    if(open<pairs){
+        curr.push_back('(');
+        solve(curr, open+1,close, pairs);
+        curr.pop_back();
+    }
+    if(close<open){
+        curr.push_back(')');
+        solve(curr, open,close+1,pairs);
+        curr.pop_back();
+    }
+    
+}
+    
+    
+    vector<string> generateParentheses(int n) {
+         result.clear();
+        string curr="";
+        int pairs = n / 2;
+        solve(curr,0,0 ,pairs);
+        return result;
+        
+    }
+};
