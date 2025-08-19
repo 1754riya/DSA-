@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    int findSubarray(vector<int> &arr) {
+         unordered_map<long long, int> freq;  // prefix sum → count
+        long long sum = 0;  
+        long long ans = 0;
+
+        freq[0] = 1; // empty prefix
+
+        for (int x : arr) {
+            sum += x;
+
+            if (freq.find(sum) != freq.end()) {
+                ans += freq[sum];  // all previous same sums → zero-sum subarrays
+            }
+            freq[sum]++;
+        }
+
+        return (int)ans; // cast to int since function signature is fixed
+    }
+};
