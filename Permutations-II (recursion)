@@ -1,0 +1,30 @@
+class Solution {
+public:
+   vector<vector<int>>result;
+   int n;
+   void solve(unordered_map<int,int>map,vector<int>temp){
+    if (temp.size()==n){ 
+        result.push_back(temp);
+        return;
+        }
+    for(auto& [num,ct]:map){
+        if(ct>0){
+        temp.push_back(num);
+        map[num]--;
+        solve(map,temp);
+        map[num]++;
+        temp.pop_back();
+    }
+   }
+   }
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        n=nums.size();
+        unordered_map<int,int>map;
+        vector<int>temp;
+        for(int num:nums){
+            map[num]++;
+        }
+        solve(map,temp);
+        return result;
+    }
+};
