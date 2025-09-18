@@ -1,0 +1,15 @@
+class Solution {
+  public:
+    int solve(int n, int from, int to, int aux){
+      if(n==0) return 0;
+      int count=0;
+      count=solve(n-1,from,aux,to);
+      count++;
+      count+=solve (n-1, aux, to,from);
+      return count;
+  }
+    int towerOfHanoi(int n, int from, int to, int aux) {
+        int solved=solve(n,from,to,aux);
+        return solved;
+    }
+};
