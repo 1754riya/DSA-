@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool allCaptail(string word){
+        for(char ch:word){
+            if(ch<'A' || ch>'Z'){
+                return false;
+            }
+        }
+    }
+    bool allsmall(string word){
+        for(char ch:word){
+            if(ch<'a' || ch>'z'){
+                return false;
+            }
+        }
+    }
+    bool detectCapitalUse(string word) {
+        vector<string>alphabets(26);
+        if (allCaptail(word) || allsmall(word)|| allsmall(word.substr(1))){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
