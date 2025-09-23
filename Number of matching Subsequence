@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool isSubsequence(const string &word, const string &s) {
+        int i = 0, j = 0;  // i for word, j for s
+        int n = word.size();
+        int m = s.size();
+        while (i < n && j < m) {
+            if (word[i] == s[j]) i++;
+            j++;
+        }
+        return i == n; // all characters in word matched
+    }
+
+    int numMatchingSubseq(string s, vector<string>& words) {
+        int count = 0;
+        for (auto &word : words) {
+            if (isSubsequence(word, s)) count++;
+        }
+        return count;
+    }
+};
