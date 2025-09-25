@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool backspaceCompare(string s, string t) {
+        string result="";
+        string temp="";
+        for(char ch:s){
+            if(ch=='#'){
+                if (!result.empty()) {
+                result.pop_back();
+            }
+            }
+            else{
+                result.push_back(ch);
+            }
+        }
+        for(char ch :t){
+            if(ch=='#'){
+                if(!temp.empty()){
+                temp.pop_back();
+            }
+            }
+            else{
+                 temp.push_back(ch);
+            }
+        }
+        return temp==result;
+    }
+};
