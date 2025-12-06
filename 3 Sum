@@ -13,7 +13,6 @@ public:
                     vector<int>temp={nums[i],nums[j],target};
                     sort(temp.begin(),temp.end());
                     st.insert(temp);
-                    
                 }
                 seen.insert(nums[j]);
             }
