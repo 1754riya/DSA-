@@ -1,0 +1,16 @@
+class Solution {
+public:
+   void recusion(TreeNode*root, int level, vector<int>&result){
+    if(root==NULL) return;
+    if(result.size()==level){ 
+        result.push_back(root->val);
+    }
+    recusion(root->right,level+1,result);
+    recusion(root->left,level+1,result);
+   }
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int>result;
+        recusion(root,0,result);
+        return result;
+    }
+};
