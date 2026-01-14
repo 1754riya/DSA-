@@ -1,0 +1,39 @@
+/*
+
+Definition for Binary Tree Node
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+
+    Node(int x){
+        data = x;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+   void helper(Node*root , vector<int>&temp,vector<vector<int>>&ans){
+       if(root==NULL)  return;
+       Node*curr=root;
+       temp.push_back(root->data);
+   if(curr->left==NULL && curr->right==NULL){
+      ans.push_back(temp);
+   }
+   helper(root->left,temp,ans);
+   helper(root->right,temp,ans);
+   temp.pop_back();
+   }
+   
+    vector<vector<int>> Paths(Node* root) {
+        // inorder tarversal
+        vector<vector<int>>ans;
+        vector<int>temp;
+        helper(root,temp,ans);
+        return ans;
+        
+    }
+};
