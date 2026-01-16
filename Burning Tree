@@ -1,0 +1,78 @@
+/*
+class Node {
+  public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:  
+    void mark_parents(Node* root, unordered_map<Node*,Node*> &parent_visited){
+        queue<Node*>q;
+        q.push(root);
+        while(!q.empty()){
+            auto start=q.front();
+            q.pop();
+            if(start->left){
+                q.push(start->left);
+                parent_visited[start->left]=start;
+            }
+            if(start->right){
+                q.push(start->right);
+                parent_visited[start->right]=start;
+            }
+        }
+    }
+    Node* findTarget(Node* root, int target) {
+        if (!root) return NULL;
+        if (root->data == target) return root;
+
+        Node* left = findTarget(root->left, target);
+        if (left) return left;
+
+        return findTarget(root->right, target);
+    }
+    int minTime(Node* root, int target) {
+        unordered_map<Node*, Node*> parent_visited;
+        mark_parents(root,parent_visited);
+        Node* targetNode = findTarget(root, target);
+        queue<Node*>q;
+        unordered_map<Node*,bool>visited;
+        q.push(targetNode);
+        visited[targetNode]=true;
+        int times=0;
+        while(!q.empty()){
+            int size=q.size();
+             bool burned = false;
+            for(int i=0; i<size;i++){
+            auto curr=q.front();
+            q.pop();
+            if(curr->left && !visited[curr->left]){
+                burned=true;
+                q.push(curr->left);
+                visited[curr->left]=true;
+            }
+             if(curr->right && !visited[curr->right]){
+                 burned=true;
+                q.push(curr->right);
+                visited[curr->right]=true;
+            }
+            if(parent_visited[curr] && !visited[parent_visited[curr]]){
+                burned=true;
+                q.push(parent_visited[curr] );
+               visited[parent_visited[curr]]= true;
+            }
+            }
+            if(burned) times++;
+        }
+        return times;
+        
+    }
+};
