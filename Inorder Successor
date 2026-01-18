@@ -1,0 +1,32 @@
+/*The structure of Node
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+    int BST(Node*root,Node*x){
+        if(root==nullptr) return -1;
+         
+        if(root->data<=x->data){
+            return BST(root->right,x);
+        }
+        else {
+            int leftAns= BST(root->left,x);
+            return (leftAns!=-1)?leftAns:root->data;
+        }
+        }
+    int inOrderSuccessor(Node *root, Node *x) {
+        return BST(root,x);
+    }
+};
