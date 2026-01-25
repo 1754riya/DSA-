@@ -1,0 +1,19 @@
+class Solution {
+  public:
+   void dfstraversal(int nodes,vector<vector<int>>&adj, vector<bool>&visited,vector<int>&result){
+       visited[nodes]=true;
+       result.push_back(nodes);
+       for(auto it:adj[nodes]){
+           if(!visited[it]){
+              dfstraversal(it,adj,visited,result);
+           }
+       }
+   }
+    vector<int> dfs(vector<vector<int>>& adj) {
+        int V=adj.size();
+        vector<bool>visited(V,false);
+        vector<int>result;
+        dfstraversal(0,adj,visited,result);
+        return result;
+    }
+};
