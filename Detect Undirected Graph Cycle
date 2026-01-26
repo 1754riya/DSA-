@@ -1,0 +1,41 @@
+class Solution {
+  public:
+   bool bfs(int node,int V,vector<vector<int>>adj,vector<bool>&visited){
+        queue<pair<int,int>>q;
+        q.push({node,-1});
+        visited[node]=true;
+        while(!q.empty()){
+            int start=q.front().first;
+            int parent=q.front().second;
+            q.pop();
+            for(int neighbor:adj[start]){
+                if(!visited[neighbor]){
+                    visited[neighbor ]=true;
+                     q.push({neighbor, start}); 
+                }
+                    else if(neighbor!=parent){
+                        return true;
+                    }
+                }
+            
+        }
+        return false;
+   }
+    bool isCycle(int V, vector<vector<int>>& edges) {
+        vector<vector<int>>adj(V);
+        vector<bool>visited(V,false);
+        for(auto &e:edges){
+            int i=e[0];
+            int j=e[1];
+                adj[i].push_back(j);
+                adj[j].push_back(i);
+            }
+        for(int i=0;i<V;i++){
+            if(!visited[i]){
+                  if (bfs(i, V,adj, visited))
+                    return true;
+            }
+        }
+        return false;
+    }
+};
