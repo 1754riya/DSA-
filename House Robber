@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int>dp;
+    int value(int indx,vector<int>&nums){
+        if(indx<0) return 0;
+        if(dp[indx]!=-1) return dp[indx];
+        int skip=value(indx-1,nums);
+        int take=nums[indx]+value(indx-2,nums);
+        return dp[indx]=max(skip,take);
+    }
+    int rob(vector<int>& nums) {
+        int indx=nums.size();
+        dp.assign(indx,-1);
+        return value(indx-1,nums);
+    }
+};
