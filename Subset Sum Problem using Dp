@@ -1,0 +1,21 @@
+class Solution {
+  public:
+   bool solve(int i,int curr_sum,vector<int>&arr,int sum,vector<vector<int>>&dp){
+       if(curr_sum==sum) return true;
+       if(i==arr.size()) return false;
+       if(dp[i][curr_sum]!=-1) return dp[i][curr_sum];
+       bool take = false;
+        if(curr_sum + arr[i] <= sum){
+        take=solve(i+1,curr_sum+arr[i],arr,sum,dp);
+        }
+       bool nottaken=solve(i+1,curr_sum,arr,sum,dp);
+        return dp[i][curr_sum]=take || nottaken;
+       
+   }
+    bool isSubsetSum(vector<int>& arr, int sum) {
+        int n=arr.size();
+        vector<vector<int>>dp(n,vector<int>(sum+1,-1));
+        return solve(0,0,arr,sum,dp);
+        
+    }
+};
