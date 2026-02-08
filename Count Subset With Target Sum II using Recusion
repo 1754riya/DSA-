@@ -1,0 +1,17 @@
+class Solution {
+  public:
+   int solve(int i, int sum,vector<int> &arr, int k){
+       if(i==arr.size()){
+           if(sum==k) return 1;
+           else return 0; 
+       }
+       int taken=solve(i+1,sum+arr[i],arr,k);
+       int nottaken=solve(i+1,sum,arr,k);
+       return taken+ nottaken;
+       
+   }
+    int countSubset(vector<int> &arr, int k) {
+        return solve(0,0,arr,k);
+        
+    }
+};
