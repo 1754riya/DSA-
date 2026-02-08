@@ -1,0 +1,22 @@
+class Solution {
+public:
+   bool solve(int i,int curr_sum,vector<int>& nums,int target,vector<vector<int>>&dp){
+    if(i==nums.size() || curr_sum>target) return false;
+    if(curr_sum==target) return true;
+    if(dp[i][curr_sum]!=-1) return dp[i][curr_sum];
+    bool taken=solve(i+1,curr_sum+nums[i],nums,target,dp);
+    bool nottaken=solve(i+1,curr_sum,nums,target,dp);
+    return dp[i][curr_sum]=taken || nottaken;
+   }
+    bool canPartition(vector<int>& nums) {
+    int total_sum=0;
+    for(int i=0;i<nums.size();i++){
+            total_sum+=nums[i];
+        }
+     if(total_sum%2!=0) return false;
+    int n=nums.size();
+    int target = total_sum / 2;
+    vector<vector<int>>dp(n,vector<int>(target+1,-1));
+    return solve(0,0,nums,target,dp);
+    }
+};
