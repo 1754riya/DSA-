@@ -1,0 +1,23 @@
+class Solution {
+public: 
+    int solve(int i, int sum,vector<int>& coins, int amount,vector<vector<int>>&dp){
+        if(sum==amount) return 0;
+        if(i==coins.size() || sum>amount) return INT_MAX;
+        if(dp[i][sum]!=-1) return dp[i][sum];
+        int take=INT_MAX;
+        if(sum+coins[i]<=amount){
+            int t=solve(i,sum+coins[i],coins,amount,dp);
+             if(t != INT_MAX){
+            take=1+t;
+        }
+        }
+        int skip=solve(i+1,sum,coins,amount,dp);
+        return dp[i][sum]=min(take,skip);
+    }
+    int coinChange(vector<int>& coins, int amount) {
+        int n=coins.size();
+        vector<vector<int>>dp(n+1,vector<int>(amount+1,-1));
+        int ans= solve(0,0,coins,amount,dp);
+        return ans == INT_MAX ? -1 : ans;
+    }
+};
