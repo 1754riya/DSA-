@@ -1,0 +1,21 @@
+class Solution {
+public: 
+    int solve(int i, int sum,vector<int>& coins, int amount){
+        if(sum==amount) return 0;
+        if(i==coins.size() || sum>amount) return INT_MAX;;
+        int take=INT_MAX;
+        if(sum+coins[i]<=amount){
+            int t=solve(i,sum+coins[i],coins,amount);
+             if(t != INT_MAX){
+            take=1+t;
+        }
+        }
+        int skip=solve(i+1,sum,coins,amount);
+        return min(take,skip);
+    }
+    int coinChange(vector<int>& coins, int amount) {
+        
+        int ans= solve(0,0,coins,amount);
+        return ans == INT_MAX ? -1 : ans;
+    }
+};
