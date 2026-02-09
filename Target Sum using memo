@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int solve(int i,int curr_sum,vector<int>& nums, int target,vector<vector<int>>&dp,int offset){
+        if(i==nums.size()){
+             if(curr_sum==target) return 1;
+             else return 0;
+        }
+        if(dp[i][curr_sum+offset]!=-1) return dp[i][curr_sum+offset];
+        int plus=solve(i+1,curr_sum+nums[i],nums,target,dp,offset);
+        int minus=solve(i+1,curr_sum-nums[i],nums,target,dp,offset);
+        return dp[i][curr_sum+offset]=plus+minus;
+    }
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int n=nums.size();
+        int totalSum = 0;
+        for(int x : nums)
+            totalSum += x;
+        int offset = totalSum;
+        vector<vector<int>>dp(n,vector<int>(2*totalSum+1,-1));
+        return solve(0,0,nums,target,dp,offset);
+    }
+};
